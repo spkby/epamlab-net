@@ -29,7 +29,7 @@ namespace Classes1
 
 			if (businessTrips[businessTrips.Length - 1] != null)
 			{
-				businessTrips[businessTrips.Length - 1].Employee = "Nikolay Nokilaev";
+				businessTrips[businessTrips.Length - 1].Account = "Nikolay Nokilaev";
 				businessTrips[businessTrips.Length - 1].TransportationExpenses = 1365;
 				businessTrips[businessTrips.Length - 1].Days = 2;
 			}

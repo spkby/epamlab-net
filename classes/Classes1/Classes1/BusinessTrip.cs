@@ -9,17 +9,17 @@ namespace Classes1
 	public class BusinessTrip
 	{
 		public const int Rate = 700;
-		public string Employee { get; set; }
+		public string Account { get; set; }
 		public int TransportationExpenses { get; set; }
 		public int Days { get; set; }
 
 		public BusinessTrip()
 		{ }
 
-		public BusinessTrip(string employee, int transportationExpenses, int days)
+		public BusinessTrip(string account, int transportationExpenses, int days)
 		{
 			TransportationExpenses = transportationExpenses;
-			Employee = employee;
+			Account = account;
 			Days = days;
 		}
 
@@ -31,7 +31,7 @@ namespace Classes1
 		public void Show()
 		{
 			Console.WriteLine("rate = " + Rate);
-			Console.WriteLine("account = " + Employee);
+			Console.WriteLine("account = " + Account);
 			Console.WriteLine("transport = " + TransportationExpenses);
 			Console.WriteLine("days = " + Days);
 			Console.WriteLine("total = " + GetTotal());
@@ -39,7 +39,7 @@ namespace Classes1
 
 		public override String ToString()
 		{
-			return Rate + ";" + Employee + ";" + TransportationExpenses + ";" + Days + ";" + GetTotal();
+			return Rate + ";" + Account + ";" + TransportationExpenses + ";" + Days + ";" + GetTotal();
 		}
 	}
 }
