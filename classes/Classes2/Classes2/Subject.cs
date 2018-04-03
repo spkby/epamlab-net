@@ -24,12 +24,12 @@ namespace Classes2
 
 		public double GetMass()
 		{
-			return Volume * Material.GetDensity();
+			return (Volume * Material.GetDensity());
 		}
 
 		public override string ToString()
 		{
-			return Name + ";" + Material + ";" + Volume + ";" + GetMass();
+			return (Name + ";" + Material + ";" + Volume + ";" + GetMass());
 		}
 
 	}

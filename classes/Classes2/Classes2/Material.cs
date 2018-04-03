@@ -32,7 +32,7 @@ namespace Classes2
 		
 		public override string ToString()
 		{
-			return Name + ";" + Density;
+			return (Name + ";" + Density);
 		}
 	}
 }
