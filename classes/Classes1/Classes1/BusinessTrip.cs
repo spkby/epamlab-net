@@ -25,7 +25,7 @@ namespace Classes1
 
 		public int GetTotal()
 		{
-			return TransportationExpenses + Rate * Days;
+			return (TransportationExpenses + Rate * Days);
 		}
 
 		public void Show()
@@ -39,7 +39,7 @@ namespace Classes1
 
 		public override String ToString()
 		{
-			return Rate + ";" + Account + ";" + TransportationExpenses + ";" + Days + ";" + GetTotal();
+			return (Rate + ";" + Account + ";" + TransportationExpenses + ";" + Days + ";" + GetTotal());
 		}
 	}
 }
