@@ -20,30 +20,27 @@ namespace Classes3
 
 			OutPurchases(purchases);
 
-			int totalCost = 0;
-			int maxCost = 0;
-			int day = 0;
+            int totalCost = 0;
+            Purchase maxP = purchases[0];
 
-			foreach (var purchase in purchases)
+            foreach (var purchase in purchases)
 			{
 				int cost = purchase.GetCost();
-				if(maxCost < cost)
+				if(maxP.GetCost() < cost)
 				{
-					maxCost = cost;
-					day = (int)purchase.WeekDay;
+                    maxP = purchase;
 				}
 				totalCost += cost;
 			}
 
 			Console.WriteLine("Mean cost {0} BYN", totalCost/purchases.Length);
-			Console.WriteLine("Day with max cost {0}", (Day)day);
+			Console.WriteLine("Day with max cost {0}", maxP.WeekDay);
 
 			Array.Sort(purchases);
 
 			OutPurchases(purchases);
 
 			Console.Read();
-
 		}
 
 		static void OutPurchases(Purchase[] purchases)

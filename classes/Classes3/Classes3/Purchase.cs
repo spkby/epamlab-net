@@ -10,8 +10,8 @@ namespace Classes3
 
 	class Purchase : IComparable<Purchase>
 	{
-		public const string PropuctName = "Milk";
-		public const int Price = 115;
+		public const string PropuctName = null;
+		public const int Price = 0;
 
 		public string Product { get; set; }
 		public int Number { get; set; }
@@ -31,17 +31,17 @@ namespace Classes3
 
 		public int GetCost()
 		{
-			return (int)(Price * Number * ((100.0 - Percent) / 100.0));
+			return ((int)(Price * Number * ((100.0 - Percent) / 100.0)));
 		}
 
 		public override string ToString()
 		{
-			return Product + ";" + Number + ";" + Percent + ";" + WeekDay + ";" + GetCost();
+			return (Product + ";" + Number + ";" + Percent + ";" + WeekDay + ";" + GetCost());
 		}
 
 		public int CompareTo(Purchase purchase)
 		{
-			return Number - purchase.Number;
+			return (GetCost() - purchase.GetCost());
 		}
 
 	}
