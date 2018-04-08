@@ -21,17 +21,17 @@ namespace Inheritance2
 
 		public override int GetCost()
 		{
-			int cost = base.CalcCost();
-			if (base.Count > DiscountCount)
+			int cost = CalcCost();
+			if (Count > DiscountCount)
 			{
 				cost = (int)((double)cost * (1.0 - (double)DiscountPercent / 100.0));
 			}
 			return cost;
 		}
 
-		protected override string PurchaseToString()
+		public override string ToString()
 		{
-			return (base.PurchaseToString() + ";" + DiscountPercent + ";" + DiscountCount);
+			return (base.ToString() + ";" + DiscountPercent + ";" + DiscountCount);
 		}
 
 	}

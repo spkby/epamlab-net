@@ -20,12 +20,12 @@ namespace Inheritance1
 
 		public override int GetCost()
 		{
-			return ((base.Price - DiscountPrice) * base.Count);
+			return ((Price - DiscountPrice) * Count);
 		}
 
-		protected override string PurchaseToString()
+		public override string ToString()
 		{
-			return (base.PurchaseToString() + ";" + DiscountPrice);
+			return (base.ToString() + ";" + DiscountPrice);
 		}
 
 	}

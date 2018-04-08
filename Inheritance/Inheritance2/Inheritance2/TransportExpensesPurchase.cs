@@ -20,12 +20,12 @@ namespace Inheritance2
 
 		public override int GetCost()
 		{
-			return (base.CalcCost() + TransportExpenses);
+			return (CalcCost() + TransportExpenses);
 		}
 
-		protected override string PurchaseToString()
+		public override string ToString()
 		{
-			return (base.PurchaseToString() + ";" + TransportExpenses);
+			return (base.ToString() + ";" + TransportExpenses);
 		}
 	}
 }

@@ -23,11 +23,6 @@ namespace Inheritance2
 
 		public abstract int GetCost();
 
-		protected virtual string PurchaseToString()
-		{
-			return Commodity + ";" + Count;
-		}
-
 		protected int CalcCost()
 		{
 			return (Commodity.Price * Count);
@@ -35,7 +30,7 @@ namespace Inheritance2
 
 		public override string ToString()
 		{
-			return (PurchaseToString()+";"+GetCost());
+			return (Commodity + ";" + Count);
 		}
 
 		public int CompareTo(AbstractPurchase other)

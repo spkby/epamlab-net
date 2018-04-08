@@ -27,15 +27,9 @@ namespace Inheritance1
 			return (Price * Count);
 		}
 
-		protected virtual string PurchaseToString()
-		{
-			return (ProductName + ";" + Price + ";" + Count);
-		}
-
-
 		public override string ToString()
 		{
-			return (PurchaseToString() + ";" + GetCost());
+			return (ProductName + ";" + Price + ";" + Count);
 		}
 
 		public override bool Equals(object obj)
