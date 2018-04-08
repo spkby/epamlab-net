@@ -17,14 +17,14 @@ namespace Inheritance1
 		}
 
 		public const int DiscountCount = 0;
-		public double DiscountPercent { get; set; }
+		public int DiscountPercent { get; set; }
 
 		public override int GetCost()
 		{
-			int cost = 0;
+			int cost = base.GetCost();
 			if (base.Count > DiscountCount)
 			{
-				cost = (int)(cost * (1.0 - DiscountPercent / 100.0));
+				cost = (int)((double)cost * (1.0 - (double)DiscountPercent / 100.0));
 			}
 			return cost;
 		}
