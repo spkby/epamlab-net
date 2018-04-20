@@ -19,7 +19,7 @@ namespace OOP
 
 		protected virtual string FieldsToString()
 		{
-			return massCargo.ToString();
+			return (this.GetType().Name + ";" + massCargo.ToString());
 		}
 
 		public override string ToString()

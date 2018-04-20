@@ -11,7 +11,7 @@ namespace OOP
 		static void Main(string[] args)
 		{
 			Ferry ferry = new Ferry(new IWeightable[]{
-								new ContainerCargo(100, 20, 20, 20, new SolidMaterial("steel", 1234)),
+								new ContainerCargo(100, 20, 20, 20, new SolidMaterial("steel", 1234, 0.5)),
 								new Passenger("Ivan Ivanov", 75),
 								new Passenger("Petr Ivanov", 68),
 								new TankCargo(100, 20, 20, new FluidMaterial("Oil", 234)),
@@ -23,27 +23,15 @@ namespace OOP
 								new Passenger("Petr Sidorov", 45)
 				});
 
-			PrintFerry(ferry.GetWeights());
+			ferry.Show();
 
-			Array.Sort(ferry.GetWeights(), new IWeightableComparer());
+			ferry.Sort();
 
-			PrintFerry(ferry.GetWeights());
+			ferry.Show();
 
-			if (ferry.IsOverloading())
-			{
-				Console.WriteLine("Overloading");
-			}
+			Console.WriteLine("Ferry is " + (ferry.IsOverloaded() ? "" : "not ") + "overloaded.");
 
 			Console.Read();
-		}
-
-		private static void PrintFerry(IWeightable[] weights)
-		{
-			foreach(IWeightable weight in weights)
-			{
-				Console.WriteLine(weight);
-			}
-			Console.WriteLine();
 		}
 	}
 }

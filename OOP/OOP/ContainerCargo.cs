@@ -28,7 +28,7 @@ namespace OOP
 
 		protected override double CalcWeight()
 		{
-			return (widthContainer * heightContainer * lengthContainer * material.GetDesity());
+			return (widthContainer * heightContainer * lengthContainer * material.GetDesity() * material.GetRatio());
 		}
 	}
 }

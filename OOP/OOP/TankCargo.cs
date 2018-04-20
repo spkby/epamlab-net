@@ -8,7 +8,6 @@ namespace OOP
 {
 	class TankCargo : Cargo
 	{
-
 		private readonly FluidMaterial fluid;
 		private readonly int radius;
 		private readonly int height;

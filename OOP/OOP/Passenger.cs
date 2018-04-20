@@ -24,7 +24,7 @@ namespace OOP
 
 		public override string ToString()
 		{
-			return name + ";" + mass;
+			return (this.GetType().Name + ";" + name + ";" + mass);
 		}
 	}
 }

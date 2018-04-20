@@ -8,8 +8,16 @@ namespace OOP
 {
 	class SolidMaterial : Material
 	{
-		public SolidMaterial(string name, int desity) : base(name, desity)
+		private readonly double ratio;
+
+		public SolidMaterial(string name, int desity, double ratio) : base(name, desity)
 		{
+			this.ratio = ratio;
+		}
+
+		public double GetRatio()
+		{
+			return ratio;
 		}
 	}
 }

@@ -17,12 +17,7 @@ namespace OOP
 			this.weights = weights;
 		}
 
-		public IWeightable[] GetWeights()
-		{
-			return weights;
-		}
-
-		public bool IsOverloading()
+		public bool IsOverloaded()
 		{
 			double totalWeight = 0;
 			foreach (IWeightable weight in weights)
@@ -32,5 +27,23 @@ namespace OOP
 			return (totalWeight > maxCapacity);
 		}
 
+		public void Show()
+		{
+			foreach (IWeightable weight in weights)
+			{
+				Console.WriteLine(weight);
+			}
+			Console.WriteLine();
+		}
+
+		public void Sort(IComparer<IWeightable> comparer)
+		{
+			Array.Sort(weights, comparer);
+		}
+
+		public void Sort()
+		{
+			Sort(new IWeightableComparer());
+		}
 	}
 }
