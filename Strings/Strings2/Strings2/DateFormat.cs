@@ -21,9 +21,9 @@ namespace Strings2
 		private char[] patternDelimiter = new char[] { '-', '/', '.' };
     private const string century = "20";
 
-    private const string patternDatePoint = @"([0-3]?[0-9]\.[0-1]?[0-9]\.(?:[0-9]{2})?[0-9]{2})";
-    private const string patternDateSlash = @"([0-3]?[0-9]\/[0-1]?[0-9]\/(?:[0-9]{2})?[0-9]{2})";
-    private const string patternDateHyphen = @"([0-3]?[0-9]\-[0-1]?[0-9]\-(?:[0-9]{2})?[0-9]{2})";
+    private const string patternDatePoint = @"([0-3]?[0-9]\.[0-1]?[0-9]\.(?:[0-9]{2})?[0-9]{2})\b";
+    private const string patternDateSlash = @"([0-3]?[0-9]\/[0-1]?[0-9]\/(?:[0-9]{2})?[0-9]{2})\b";
+    private const string patternDateHyphen = @"([0-3]?[0-9]\-[0-1]?[0-9]\-(?:[0-9]{2})?[0-9]{2})\b";
 
     private const string patternDate = patternDateHyphen + "|" + patternDatePoint + "|" + patternDateSlash;
 
