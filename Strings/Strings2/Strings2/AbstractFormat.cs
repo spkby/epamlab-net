@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Strings2
 {
-	abstract class Format
+	abstract class AbstractFormat
 	{
 		private Regex regex;
 
-		public Format(string pattern)
+		public AbstractFormat(string pattern)
 		{
 			regex = new Regex(pattern, RegexOptions.IgnoreCase);
 		}

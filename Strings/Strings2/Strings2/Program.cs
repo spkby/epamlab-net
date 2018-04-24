@@ -19,8 +19,8 @@ namespace Strings2
 				using (StreamReader reader = new StreamReader(pathIn))
 				using (StreamWriter writer = new StreamWriter(pathOut))
 				{
-					Format money = new MoneyFormat();
-					Format date = new DateFormat();
+					AbstractFormat money = new MoneyFormat();
+					AbstractFormat date = new DateFormat();
 					string line;
 					while ((line = reader.ReadLine()) != null)
 					{

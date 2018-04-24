@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -7,19 +8,13 @@ using System.Threading.Tasks;
 
 namespace Strings2
 {
-	class DateFormat : Format
+	class DateFormat : AbstractFormat
 	{
 		public DateFormat() : base(patternDate)
 		{
 		}
-
-		private string[] months = new string[]{
-            null, "January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
-    };
-
 		private char[] patternDelimiter = new char[] { '-', '/', '.' };
-    private const string century = "20";
+		private const string century = "20";
 
     private const string patternDatePoint = @"([0-3]?[0-9]\.[0-1]?[0-9]\.(?:[0-9]{2})?[0-9]{2})\b";
     private const string patternDateSlash = @"([0-3]?[0-9]\/[0-1]?[0-9]\/(?:[0-9]{2})?[0-9]{2})\b";
@@ -39,19 +34,36 @@ namespace Strings2
 			string oldDate = groups[GetGroup()].Value;
 			string[] strings = oldDate.Split(patternDelimiter);
 
-			if((Int32.Parse(strings[1]) >12 || Int32.Parse(strings[1]) <= 0)
-				&& (Int32.Parse(strings[0]) > 31 || Int32.Parse(strings[0]) >= 0))
+			if (!IsDate(strings))
 			{
 				return oldDate;
 			}
 
-			string month = months[Int32.Parse(strings[1])];
+			DateTime dateTime = new DateTime(Int32.Parse((strings[2].Length == 2 ? century : "") + strings[2]),
+				Int32.Parse(strings[1]), Int32.Parse(strings[0]));
 
-			string day = (Int32.Parse(strings[0])).ToString();
+			return (dateTime.ToString("m", CultureInfo.CreateSpecificCulture("en-US")) + ", " + dateTime.ToString("yyyy"));
+		}
 
-			string year = strings[2].Length > 2 ? strings[2] : century + strings[2];
+		private bool IsDate(string[] strings)
+		{
+			bool isDate = true;
+			if ((Int32.Parse(strings[1]) > 12 || Int32.Parse(strings[1]) <= 0)
+			&& (Int32.Parse(strings[0]) > 31 || Int32.Parse(strings[0]) >= 0))
+			{
+				isDate = false;
+			}
 
-			return (month + " " + day + ", " + year);
+			try
+			{
+				DateTime dateTime = new DateTime(Int32.Parse(strings[2]), Int32.Parse(strings[1]), Int32.Parse(strings[0]));
+			}
+			catch (ArgumentOutOfRangeException)
+			{
+				isDate = false;
+			}
+
+			return isDate;
 		}
 	}
 }

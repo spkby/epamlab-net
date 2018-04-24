@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DateFormat.cs" />
-    <Compile Include="Format.cs" />
+    <Compile Include="AbstractFormat.cs" />
     <Compile Include="MoneyFormat.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

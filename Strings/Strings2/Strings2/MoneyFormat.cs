@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Strings2
 {
-	class MoneyFormat : Format
+	class MoneyFormat : AbstractFormat
 	{
 		public MoneyFormat() : base(patternMoney)
 		{
