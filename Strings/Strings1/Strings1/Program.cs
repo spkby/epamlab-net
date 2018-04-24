@@ -17,9 +17,11 @@ namespace Strings1
 			string resultHead = "result(";
 			string resultTail = ") = ";
 			string errorHead = "error-lines = ";
-			string path = @"..\..\in5.csv";
+			string path = @"..\..\in2.csv";
+			int resultHeadLenght = resultHead.Length;
 
-			StringBuilder resultLine = new StringBuilder();
+			StringBuilder resultLine = new StringBuilder(resultHead);
+
 			double result = 0.0;
 			int errorLines = 0;
 
@@ -54,22 +56,21 @@ namespace Strings1
 						}
 
 						result += number;
-						StringBuilder element = new StringBuilder();
 
-						if (resultLine.Length > 0)
+						if (resultLine.Length > resultHeadLenght)
 						{
-							element.Append(number < 0 ? signMinus : signPlus).Append(Math.Abs(number));
+							resultLine.Append(number < 0 ? signMinus : signPlus).Append(Math.Abs(number));
 						}
 						else
 						{
-							element.Append(number);
+							resultLine.Append(number);
 						}
-
-						resultLine.Append(element);
 					}
 				}
 
-				Console.WriteLine(resultHead + resultLine + resultTail + result);
+				resultLine.Append(resultTail + result);
+
+				Console.WriteLine(resultLine);
 				Console.WriteLine(errorHead + errorLines);
 				Console.Read();
 			}
