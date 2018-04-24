@@ -34,29 +34,32 @@ namespace Strings2
 			string oldDate = groups[GetGroup()].Value;
 			string[] strings = oldDate.Split(patternDelimiter);
 
-			if (!IsDate(strings))
+			int day = Int32.Parse(strings[0]);
+			int month = Int32.Parse(strings[1]);
+			int year = Int32.Parse((strings[2].Length == 2 ? century : "") + strings[2]);
+
+			if (!IsDate(day, month, year))
 			{
 				return oldDate;
 			}
 
-			DateTime dateTime = new DateTime(Int32.Parse((strings[2].Length == 2 ? century : "") + strings[2]),
-				Int32.Parse(strings[1]), Int32.Parse(strings[0]));
+			DateTime dateTime = new DateTime(year, month, day);
 
-			return (dateTime.ToString("m", CultureInfo.CreateSpecificCulture("en-US")) + ", " + dateTime.ToString("yyyy"));
+			return (dateTime.ToString("MMMM dd, yyyy", CultureInfo.CreateSpecificCulture("en-US")));
 		}
 
-		private bool IsDate(string[] strings)
+		private bool IsDate(int day, int month, int year)
 		{
 			bool isDate = true;
-			if ((Int32.Parse(strings[1]) > 12 || Int32.Parse(strings[1]) <= 0)
-			&& (Int32.Parse(strings[0]) > 31 || Int32.Parse(strings[0]) >= 0))
+
+			if ((month > 12 || month <= 0) && (day > 31 || day >= 0))
 			{
 				isDate = false;
 			}
 
 			try
 			{
-				DateTime dateTime = new DateTime(Int32.Parse(strings[2]), Int32.Parse(strings[1]), Int32.Parse(strings[0]));
+				DateTime dateTime = new DateTime(year, month, day);
 			}
 			catch (ArgumentOutOfRangeException)
 			{
