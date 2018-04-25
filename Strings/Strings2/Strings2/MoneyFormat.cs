@@ -13,7 +13,7 @@ namespace Strings2
 		{
 		}
 
-		private const string patternMoney = @"(^|\s+)(\d+(\s+\d{3})*\s+)(blr|belarusian)";
+		private const string patternMoney = @"(^|\s+)(\d{1,3}(\s+\d{3})*\s+)(blr|belarusian)";
     private const string patternSpaces = @"\s+";
     private const string noSpace = "";
 		private const string space = " ";
