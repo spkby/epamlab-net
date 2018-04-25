@@ -13,7 +13,7 @@ namespace Strings2
 		public DateFormat() : base(patternDate)
 		{
 		}
-		private char[] patternDelimiter = new char[] { '-', '/', '.' };
+		private char[] delimiters = new char[] { '-', '/', '.' };
 		private const string century = "20";
 
     private const string patternDatePoint = @"([0-3]?[0-9]\.[0-1]?[0-9]\.(?:[0-9]{2})?[0-9]{2})\b";
@@ -32,7 +32,7 @@ namespace Strings2
 		protected override string GetReplacement(GroupCollection groups)
 		{
 			string oldDate = groups[GetGroup()].Value;
-			string[] strings = oldDate.Split(patternDelimiter);
+			string[] strings = oldDate.Split(delimiters);
 
 			int day = Int32.Parse(strings[0]);
 			int month = Int32.Parse(strings[1]);
@@ -52,7 +52,7 @@ namespace Strings2
 		{
 			bool isDate = true;
 
-			if ((month > 12 || month <= 0) && (day > 31 || day >= 0))
+			if (month > 12 || month <= 0 || day > 31 || day <= 0)
 			{
 				isDate = false;
 			}
