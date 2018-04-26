@@ -27,7 +27,6 @@ namespace Strings2
             catch (FileNotFoundException)
             {
                 Console.WriteLine("File not found");
-                Console.Read();
             }
         }
     }
