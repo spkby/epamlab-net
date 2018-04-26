@@ -1,49 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OOP
 {
-	class Ferry
-	{
-		private const int maxCapacity = 100000;
+    class Ferry
+    {
+        private const int MaxCapacity = 100000;
 
-		private readonly IWeightable[] weights;
+        private readonly IWeightable[] _weights;
 
-		public Ferry(IWeightable[] weights)
-		{
-			this.weights = weights;
-		}
+        public Ferry(IWeightable[] weights)
+        {
+            _weights = weights;
+        }
 
-		public bool IsOverloaded()
-		{
-			double totalWeight = 0;
-			foreach (IWeightable weight in weights)
-			{
-				totalWeight += weight.GetWeight();
-			}
-			return (totalWeight > maxCapacity);
-		}
+        public bool IsOverloaded()
+        {
+            double totalWeight = 0;
+            foreach (IWeightable weight in _weights)
+            {
+                totalWeight += weight.GetWeight();
+            }
 
-		public void Show()
-		{
-			foreach (IWeightable weight in weights)
-			{
-				Console.WriteLine(weight);
-			}
-			Console.WriteLine();
-		}
+            return (totalWeight > MaxCapacity);
+        }
 
-		public void Sort(IComparer<IWeightable> comparer)
-		{
-			Array.Sort(weights, comparer);
-		}
+        public void Show()
+        {
+            foreach (IWeightable weight in _weights)
+            {
+                Console.WriteLine(weight);
+            }
 
-		public void Sort()
-		{
-			Sort(new IWeightableComparer());
-		}
-	}
+            Console.WriteLine();
+        }
+
+        public void Sort(IComparer<IWeightable> comparer)
+        {
+            Array.Sort(_weights, comparer);
+        }
+
+        public void Sort()
+        {
+            Sort(new IWeightableComparer());
+        }
+    }
 }

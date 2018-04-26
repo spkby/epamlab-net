@@ -1,35 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OOP
+﻿namespace OOP
 {
-	abstract class Material
-	{
-		private readonly string Name;
-    private readonly int Desity;
+    abstract class Material
+    {
+        private readonly string _name;
+        private readonly int _desity;
 
-		public Material(string name, int desity)
-		{
-			Name = name;
-			Desity = desity;
-		}
+        public Material(string name, int desity)
+        {
+            _name = name;
+            _desity = desity;
+        }
 
-		public string GetName()
-		{
-			return Name;
-		}
+        public int GetDesity()
+        {
+            return _desity;
+        }
 
-		public int GetDesity()
-		{
-			return Desity;
-		}
-
-		public override string ToString()
-		{
-			return (Name + ";" + Desity);
-		}
-	}
+        public override string ToString()
+        {
+            return (_name + ";" + _desity);
+        }
+    }
 }

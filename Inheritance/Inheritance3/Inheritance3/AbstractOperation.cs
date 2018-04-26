@@ -1,38 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Inheritance3
 {
-	abstract class AbstractOperation : IComparable<AbstractOperation>
-	{
+    abstract class AbstractOperation : IComparable<AbstractOperation>
+    {
+        public int arg1 { get; }
+        public int arg2 { get; }
 
-		public int arg1 { get; set; }
+        public AbstractOperation(int arg1, int arg2)
+        {
+            this.arg1 = arg1;
+            this.arg2 = arg2;
+        }
 
-		public int arg2 { get; set; }
+        public abstract int GetResult();
 
-		public AbstractOperation()
-		{
-		}
+        public override string ToString()
+        {
+            return (arg1 + ";" + arg2);
+        }
 
-		public AbstractOperation(int arg1, int arg2)
-		{
-			this.arg1 = arg1;
-			this.arg2 = arg2;
-		}
-
-		public abstract int GetResult();
-
-		public override string ToString()
-		{
-			return (arg1+";"+arg2);
-		}
-
-		public int CompareTo(AbstractOperation other)
-		{
-			return (other.GetResult()- GetResult());
-		}
-	}
+        public int CompareTo(AbstractOperation other)
+        {
+            return (other.GetResult() - GetResult());
+        }
+    }
 }

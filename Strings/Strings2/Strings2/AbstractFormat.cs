@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Strings2
 {
@@ -35,8 +31,8 @@ namespace Strings2
 			return Regex.Replace(str, regex, dest);
 		}
 
-		abstract protected string GetReplacement(GroupCollection groups);
+		protected abstract string GetReplacement(GroupCollection groups);
 
-		abstract protected int GetGroup();
+		protected abstract int GetGroup();
 	}
 }

@@ -1,72 +1,64 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Strings2
 {
-	class DateFormat : AbstractFormat
-	{
-		public DateFormat() : base(patternDate)
-		{
-		}
-		private char[] delimiters = new char[] { '-', '/', '.' };
-		private const string century = "20";
+    class DateFormat : AbstractFormat
+    {
+        public DateFormat() : base(PatternDate)
+        {
+        }
 
-    private const string patternDatePoint = @"([0-3]?[0-9]\.[0-1]?[0-9]\.(?:[0-9]{2})?[0-9]{2})\b";
-    private const string patternDateSlash = @"([0-3]?[0-9]\/[0-1]?[0-9]\/(?:[0-9]{2})?[0-9]{2})\b";
-    private const string patternDateHyphen = @"([0-3]?[0-9]\-[0-1]?[0-9]\-(?:[0-9]{2})?[0-9]{2})\b";
+        private readonly char[] _delimiters = {'-', '/', '.'};
+        private const string Century = "20";
 
-    private const string patternDate = patternDateHyphen + "|" + patternDatePoint + "|" + patternDateSlash;
+        private const string PatternDatePoint = @"([0-3]?[0-9]\.[0-1]?[0-9]\.(?:[0-9]{2})?[0-9]{2})\b";
+        private const string PatternDateSlash = @"([0-3]?[0-9]\/[0-1]?[0-9]\/(?:[0-9]{2})?[0-9]{2})\b";
+        private const string PatternDateHyphen = @"([0-3]?[0-9]\-[0-1]?[0-9]\-(?:[0-9]{2})?[0-9]{2})\b";
 
-    private const int group = 0;
+        private const string PatternDate = PatternDateHyphen + "|" + PatternDatePoint + "|" + PatternDateSlash;
 
-	protected override int GetGroup()
-		{
-			return group;
-		}
+        private const int Group = 0;
 
-		protected override string GetReplacement(GroupCollection groups)
-		{
-			string oldDate = groups[GetGroup()].Value;
-			string[] strings = oldDate.Split(delimiters);
+        protected override int GetGroup()
+        {
+            return Group;
+        }
 
-			int day = Int32.Parse(strings[0]);
-			int month = Int32.Parse(strings[1]);
-			int year = Int32.Parse((strings[2].Length == 2 ? century : "") + strings[2]);
+        protected override string GetReplacement(GroupCollection groups)
+        {
+            string oldDate = groups[GetGroup()].Value;
+            string[] strings = oldDate.Split(_delimiters);
 
-			if (!IsDate(day, month, year))
-			{
-				return oldDate;
-			}
+            int day = int.Parse(strings[0]);
+            int month = int.Parse(strings[1]);
+            int year = int.Parse((strings[2].Length == 2 ? Century : "") + strings[2]);
 
-			DateTime dateTime = new DateTime(year, month, day);
+            if (!IsDate(day, month, year))
+            {
+                return oldDate;
+            }
 
-			return (dateTime.ToString("MMMM dd, yyyy", CultureInfo.CreateSpecificCulture("en-US")));
-		}
+            DateTime dateTime = new DateTime(year, month, day);
 
-		private bool IsDate(int day, int month, int year)
-		{
-			bool isDate = true;
+            return (dateTime.ToString("MMMM dd, yyyy", CultureInfo.CreateSpecificCulture("en-US")));
+        }
 
-			if (month > 12 || month <= 0 || day > 31 || day <= 0)
-			{
-				isDate = false;
-			}
+        private bool IsDate(int day, int month, int year)
+        {
+            bool isDate = !(month > 12 || month <= 0 || day > 31 || day <= 0);
 
-			try
-			{
-				DateTime dateTime = new DateTime(year, month, day);
-			}
-			catch (ArgumentOutOfRangeException)
-			{
-				isDate = false;
-			}
+            try
+            {
+                DateTime dateTime = new DateTime(year, month, day);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                isDate = false;
+            }
 
-			return isDate;
-		}
-	}
+            return isDate;
+        }
+    }
 }

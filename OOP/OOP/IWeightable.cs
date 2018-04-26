@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OOP
+﻿namespace OOP
 {
-	interface IWeightable
-	{
-		double GetWeight();
-	}
+    interface IWeightable
+    {
+        double GetWeight();
+    }
 }

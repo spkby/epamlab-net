@@ -1,43 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Inheritance1
+﻿namespace Inheritance1
 {
-	class Purchase
-	{
+    class Purchase
+    {
+        public string ProductName { get; }
+        public int Price { get; }
+        public int Count { get; }
 
-		public string ProductName { get; set; }
-		public int Price { get; set; }
-		public int Count { get; set; }
+        public Purchase(string productname, int price, int count)
+        {
+            ProductName = productname;
+            Price = price;
+            Count = count;
+        }
 
-		public Purchase() { }
+        public virtual int GetCost()
+        {
+            return (Price * Count);
+        }
 
-		public Purchase(string productname, int price, int count)
-		{
-			ProductName = productname;
-			Price = price;
-			Count = count;
-		}
+        public override string ToString()
+        {
+            return (ProductName + ";" + Price + ";" + Count);
+        }
 
-		public virtual int GetCost()
-		{
-			return (Price * Count);
-		}
-
-		public override string ToString()
-		{
-			return (ProductName + ";" + Price + ";" + Count);
-		}
-
-		public override bool Equals(object obj)
-		{
-			var purchase = obj as Purchase;
-			return (purchase != null &&
-						 ProductName == purchase.ProductName &&
-						 Price == purchase.Price);
-		}
-	}
+        public override bool Equals(object obj)
+        {
+            var purchase = obj as Purchase;
+            return (purchase != null &&
+                    ProductName == purchase.ProductName &&
+                    Price == purchase.Price);
+        }
+    }
 }

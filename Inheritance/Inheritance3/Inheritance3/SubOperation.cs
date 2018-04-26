@@ -1,25 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Inheritance3
+﻿namespace Inheritance3
 {
-	class SubOperation : AbstractOperation
-	{
-		public SubOperation(int arg1, int arg2) : base(arg1, arg2)
-		{ }
+    class SubOperation : AbstractOperation
+    {
+        public SubOperation(int arg1, int arg2) : base(arg1, arg2)
+        {
+        }
 
-		public override int GetResult()
-		{
-			return (arg1 - arg2);
-		}
+        public override int GetResult()
+        {
+            return (arg1 - arg2);
+        }
 
-		public override string ToString()
-		{
-			return (arg1 + "-" + arg2 + "=" + GetResult());
-		}
-	
-	}
+        public override string ToString()
+        {
+            return (arg1 + "-" + arg2 + "=" + GetResult());
+        }
+    }
 }
