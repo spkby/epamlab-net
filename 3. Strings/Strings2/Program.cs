@@ -5,10 +5,10 @@ namespace Strings2
 {
     class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            string pathIn = @"..\..\in.txt";
-            string pathOut = @"..\..\out.txt";
+            const string pathIn = @"..\..\in.txt";
+            const string pathOut = @"..\..\out.txt";
 
             try
             {

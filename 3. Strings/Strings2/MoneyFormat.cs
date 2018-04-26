@@ -4,24 +4,24 @@ namespace Strings2
 {
     class MoneyFormat : AbstractFormat
     {
-        public MoneyFormat() : base(patternMoney)
+        public MoneyFormat() : base(PatternMoney)
         {
         }
 
-        private const string patternMoney = @"(^|\s+)(\d{1,3}(\s+\d{3})*\s+)(blr|belarusian)";
-        private const string patternSpaces = @"\s+";
-        private const string noSpace = "";
-        private const string space = " ";
-        private const int group = 2;
+        private const string PatternMoney = @"(^|\s+)(\d{1,3}(\s+\d{3})*\s+)(blr|belarusian)";
+        private const string PatternSpaces = @"\s+";
+        private const string NoSpace = "";
+        private const string Space = " ";
+        private const int Group = 2;
 
         protected override string GetReplacement(GroupCollection groups)
         {
-            return (Regex.Replace(groups[group].Value, patternSpaces, noSpace) + space);
+            return (Regex.Replace(groups[Group].Value, PatternSpaces, NoSpace) + Space);
         }
 
         protected override int GetGroup()
         {
-            return group;
+            return Group;
         }
     }
 }
