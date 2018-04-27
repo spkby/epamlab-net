@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Strings1
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             const string signPlus = " + ";
             const string signMinus = " - ";
@@ -31,12 +31,11 @@ namespace Strings1
                     {
                         string[] elements = line.Split(delimiter);
 
-                        int index = 0;
-                        double number = 0.0;
+                        double number;
 
                         try
                         {
-                            index = int.Parse(elements[0]);
+                            int index = int.Parse(elements[0]);
 
                             if (index < 0 || index >= elements.Length)
                             {
@@ -65,7 +64,7 @@ namespace Strings1
                     }
                 }
 
-                resultLine.Append(resultTail + result);
+                resultLine.Append(resultTail).Append(result);
 
                 Console.WriteLine(resultLine);
                 Console.WriteLine(errorHead + errorLines);
