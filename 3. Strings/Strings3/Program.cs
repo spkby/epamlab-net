@@ -10,7 +10,7 @@ namespace Strings3
         public static void Main()
         {
             // match quotation
-            const string quotation = "([^']\".*\")";
+            const string quotation = "('.*')|(\".*\")";
             // match miltilines comment
             const string multiLinesCommnent = @"(\/\*([\s\S]*?)\*\/)";
             // match line comments
@@ -18,8 +18,8 @@ namespace Strings3
 
             const string pattern = quotation + "|" + multiLinesCommnent + "|" + lineComment;
 
-            const int groupMultiLinesCommnent = 2;
-            const int groupLineComment = 4;
+            const int groupMultiLinesCommnent = 3;
+            const int groupLineComment = 5;
 
             var newLine = Environment.NewLine;
             const string emptyStr = "";

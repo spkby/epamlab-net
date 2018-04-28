@@ -29,6 +29,7 @@ namespace ConsoleApplication3
       char f1 = '\n';
       char f2 = '\"'; 
       "".ToString();
+	  char f2 = '\"'; // symbol " for testing purposes
     }
   }
 }
