@@ -32,13 +32,7 @@ namespace Strings3
                 using (var reader = new StreamReader(pathIn))
                 using (var writer = new StreamWriter(pathOut))
                 {
-                    var lines = new StringBuilder();
-                    string line;
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        lines.AppendLine(line);
-                    }
-
+                    var lines = new StringBuilder(reader.ReadToEnd());
                     var regex = new Regex(pattern);
                     var matches = regex.Matches(lines.ToString());
 
