@@ -9,17 +9,20 @@ namespace Strings3
     {
         public static void Main()
         {
+            const string delimiter = "|";
             // match quotation
-            const string quotation = "('.*')|(\".*\")";
+            const string singleQuotes = "('.*')";
+            const string doubleQuotes = "(\".*?(?<!\\\\)(\\\\{2})*\")";
             // match miltilines comment
             const string multiLinesCommnent = @"(\/\*([\s\S]*?)\*\/)";
             // match line comments
             const string lineComment = @"(\/\/.*\n)";
 
-            const string pattern = quotation + "|" + multiLinesCommnent + "|" + lineComment;
+            const string pattern = singleQuotes + delimiter + doubleQuotes
+                                   + delimiter + multiLinesCommnent + delimiter + lineComment;
 
-            const int groupMultiLinesCommnent = 3;
-            const int groupLineComment = 5;
+            const int groupMultiLinesCommnent = 4;
+            const int groupLineComment = 6;
 
             var newLine = Environment.NewLine;
             const string emptyStr = "";

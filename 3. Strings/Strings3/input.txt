@@ -24,6 +24,7 @@ namespace ConsoleApplication3
       char ccc = '*';
       char cccc = '"'; //"hjhkjhkj
       Console.WriteLine("/*dfsdf*////****/**//**Hello, world!\\");/**/ //
+      Console.WriteLine(""+/*++*/"/*dfsdf*////****/**//**Hello, world!\\");/**/ //
       int ccccc = 100/'*';
       char f = '\\';
       char f1 = '\n';
