@@ -15,10 +15,9 @@
         public const string TotalCost = "Total cost";        
         public const string ErrorNullName = "Null name";        
         public const string ErrorEmptyName = "Empty name";        
-        public const string ErrorExceptionNonpositiveHead = "Invalid value ";        
-        public const string ErrorExceptionNonpositiveBody = " in the argument ";        
-        public const string ErrorExceptionNonpositiveTail = " is invalid"; 
+        public const string ErrorNonpositiveHead = "Invalid value ";        
+        public const string ErrorNonpositiveBody = " in the argument ";        
+        public const string ErrorNonpositiveTail = " is invalid"; 
         public const string ErrorPriceAfterDiscount = "Nonpositive price after discount"; 
-        
     }
 }

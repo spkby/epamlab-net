@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Collections1
 {
     public class Comparator : IComparer<Purchase>
     {
-        private enum Sign
+        private enum Equals
         {
             Equal,
             More
@@ -15,18 +14,14 @@ namespace Collections1
         {
             var result = x.Name.CompareTo(y.Name);
 
-            if (result == 0) {
-                result = GetRank(x) - GetRank(y);
-                if (result == 0) {
-                    result = x.GetCost().CompareTo(y.GetCost());
-                }
-            }
-            return result;
+            if (result != 0) return result;
+            result = GetRank(x) - GetRank(y);
+            return (result != 0 ? result : x.GetCost().CompareTo(y.GetCost()));
         }
 
         private static int GetRank(Purchase p)
         {
-            return (IsPricePurchase(p) ? (int) Sign.More : (int) Sign.Equal);
+            return (IsPricePurchase(p) ? (int) Equals.More : (int) Equals.Equal);
         }
 
         private static bool IsPricePurchase(Purchase p)

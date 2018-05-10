@@ -4,8 +4,6 @@ namespace Collections1
 {
     public class InvalidArgumentException : ArgumentException
     {
-        //private readonly string _errorMessage;
-        
         public InvalidArgumentException(string errorMessage) : base(errorMessage)
         {
         }

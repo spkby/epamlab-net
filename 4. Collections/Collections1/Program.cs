@@ -21,20 +21,25 @@ namespace Collections1
             var mainCollection = new PurchaseCollection(mainFile);
 
             Print(mainCollection, "after creation");
-            
+
             var addonCollection = new PurchaseCollection(addonFile);
 
             mainCollection.Insert(0, addonCollection.GetPurchaseByIndex(addonCollection.Size() - 1));
             mainCollection.Insert(1000, addonCollection.GetPurchaseByIndex(0));
             mainCollection.Insert(2, addonCollection.GetPurchaseByIndex(2));
 
-            if (mainCollection.Delete(3) < 0) {
+            if (mainCollection.Delete(3) < 0)
+            {
                 PrintErr("Error Deletion: invalid index");
             }
-            if (mainCollection.Delete(10) < 0) {
+
+            if (mainCollection.Delete(10) < 0)
+            {
                 PrintErr("Error Deletion: invalid index");
             }
-            if (mainCollection.Delete(-5) < 0) {
+
+            if (mainCollection.Delete(-5) < 0)
+            {
                 PrintErr("Error Deletion: invalid index");
             }
 

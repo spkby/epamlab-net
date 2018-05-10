@@ -15,9 +15,9 @@ namespace Collections1
 
         public override string ToString()
         {
-            return (Constants.ErrorExceptionNonpositiveHead + _value
-                                                        + Constants.ErrorExceptionNonpositiveBody + _field
-                                                        + Constants.ErrorExceptionNonpositiveTail);
+            return (Constants.ErrorNonpositiveHead + _value
+                                                   + Constants.ErrorNonpositiveBody + _field
+                                                   + Constants.ErrorNonpositiveTail);
         }
     }
 }

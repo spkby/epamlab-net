@@ -10,7 +10,7 @@ namespace Collections1
         public CsvLineException(CsvLineException exception) : this(exception._cvsLine, exception._errorMessage)
         {
         }
-        
+
         public CsvLineException(string csvLine, ArgumentException exception) : this(csvLine, exception.ToString())
         {
         }

@@ -6,9 +6,13 @@ namespace Collections1
     {
         public enum FieldsPosition
         {
-            Name, Price, Count, Discount, Cost
+            Name,
+            Price,
+            Count,
+            Discount,
+            Cost
         }
-        
+
         public static readonly string[] FieldsName =
         {
             "Name", "Price", "Count", "Discount", "Cost"

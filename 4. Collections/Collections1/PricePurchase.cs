@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Collections1
+﻿namespace Collections1
 {
     class PricePurchase : Purchase
     {
