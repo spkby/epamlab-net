@@ -38,13 +38,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Comparator.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="CsvLineException.cs" />
+    <Compile Include="InvalidArgumentException.cs" />
+    <Compile Include="NonpositiveArgumentException.cs" />
+    <Compile Include="TableFormat.cs" />
     <Compile Include="PricePurchase.cs" />
+    <Compile Include="PrintPurchase.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Purchase.cs" />
     <Compile Include="PurchaseCollection.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="addon.csv" />
+    <Content Include="in.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Exceptions" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
