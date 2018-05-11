@@ -4,7 +4,7 @@ namespace Collections1
 {
     public class Comparator : IComparer<Purchase>
     {
-        private enum Equals
+        private enum Equal
         {
             Equal,
             More
@@ -21,12 +21,12 @@ namespace Collections1
 
         private static int GetRank(Purchase p)
         {
-            return (IsPricePurchase(p) ? (int) Equals.More : (int) Equals.Equal);
+            return (IsPricePurchase(p) ? (int) Equal.More : (int) Equal.Equal);
         }
 
         private static bool IsPricePurchase(Purchase p)
         {
-            return p is PricePurchase;
+            return (p is PricePurchase);
         }
     }
 }

@@ -9,16 +9,16 @@ namespace Collections1
 {
     public class PurchaseCollection
     {
-        private readonly List<Purchase> _purchases;
+        private readonly List<Purchase> purchases;
 
-        private bool _ordered = false;
+        private bool ordered = false;
 
         private const int PurchaseFieldsNumber = 3;
         private const int PricePurchaseFieldsNumber = 4;
 
         public PurchaseCollection()
         {
-            _purchases = new List<Purchase>();
+            purchases = new List<Purchase>();
         }
 
         public PurchaseCollection(string csvFile) : this()
@@ -30,19 +30,13 @@ namespace Collections1
                     string line;
                     while ((line = sr.ReadLine()) != null)
                     {
-                        Purchase purchase = null;
                         try
                         {
-                            purchase = CreatePurchase(line);
+                            purchases.Add(CreatePurchase(line));
                         }
                         catch (CsvLineException e)
                         {
                             Console.WriteLine(e);
-                        }
-
-                        if (purchase != null)
-                        {
-                            _purchases.Add(purchase);
                         }
                     }
                 }
@@ -55,7 +49,7 @@ namespace Collections1
 
         public int Size()
         {
-            return _purchases.Count;
+            return purchases.Count;
         }
 
         private static Purchase CreatePurchase(string csvString)
@@ -115,27 +109,22 @@ namespace Collections1
 
         public void Insert(int index, Purchase p)
         {
-            if (index < 0)
+            if (!IsCorrectIndex(index))
             {
-                index = 0;
+                index = purchases.Count;
             }
 
-            if (index > _purchases.Count)
-            {
-                index = _purchases.Count;
-            }
-
-            _purchases.Insert(index, p);
+            purchases.Insert(index, p);
         }
 
         private void UnOrdered()
         {
-            _ordered = false;
+            ordered = false;
         }
 
         private bool IsCorrectIndex(int index)
         {
-            return (index >= 0 && index < _purchases.Count);
+            return (index >= 0 && index < purchases.Count);
         }
 
         public int Delete(int index)
@@ -143,8 +132,8 @@ namespace Collections1
             int result;
             if (IsCorrectIndex(index))
             {
-                _purchases.RemoveAt(index);
-                result = _purchases.Count;
+                purchases.RemoveAt(index);
+                result = purchases.Count;
                 UnOrdered();
             }
             else
@@ -159,7 +148,7 @@ namespace Collections1
         {
             var totalCost = 0;
 
-            foreach (var purchase in _purchases)
+            foreach (var purchase in purchases)
             {
                 totalCost += purchase.GetCost();
             }
@@ -184,7 +173,7 @@ namespace Collections1
                 Fields.FieldsName[(int) Fields.FieldsPosition.Cost],
                 Fields.FieldsName[(int) Fields.FieldsPosition.Discount]));
 
-            foreach (var purchase in _purchases)
+            foreach (var purchase in purchases)
             {
                 builder.AppendLine(PrintPurchase.GetRow(purchase, format));
             }
@@ -197,18 +186,18 @@ namespace Collections1
 
         public void Sort(IComparer<Purchase> cmp)
         {
-            _purchases.Sort(cmp);
-            _ordered = true;
+            purchases.Sort(cmp);
+            ordered = true;
         }
 
         public int Search(Purchase purchase, IComparer<Purchase> cmp)
         {
-            if (!_ordered)
+            if (!ordered)
             {
                 Sort(cmp);
             }
 
-            return _purchases.BinarySearch(purchase, cmp);
+            return purchases.BinarySearch(purchase, cmp);
         }
 
         public Purchase GetPurchaseByIndex(int index)
@@ -216,7 +205,7 @@ namespace Collections1
             Purchase purchase = null;
             if (IsCorrectIndex(index))
             {
-                purchase = _purchases[index];
+                purchase = purchases[index];
             }
 
             return purchase;

@@ -4,19 +4,19 @@ namespace Collections1
 {
     public class NonpositiveArgumentException : ArgumentException
     {
-        private readonly int _value;
-        private readonly Fields.FieldsPosition _field;
+        private readonly int value;
+        private readonly Fields.FieldsPosition field;
 
         public NonpositiveArgumentException(int value, Fields.FieldsPosition field)
         {
-            _value = value;
-            _field = field;
+            this.value = value;
+            this.field = field;
         }
 
         public override string ToString()
         {
-            return (Constants.ErrorNonpositiveHead + _value
-                                                   + Constants.ErrorNonpositiveBody + _field
+            return (Constants.ErrorNonpositiveHead + value
+                                                   + Constants.ErrorNonpositiveBody + field
                                                    + Constants.ErrorNonpositiveTail);
         }
     }

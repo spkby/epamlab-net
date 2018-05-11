@@ -12,7 +12,7 @@
         {
             return (purchase is PricePurchase
                 ? ((PricePurchase) purchase).Discount.ToString()
-                : Constants.EmptyDiscount.ToString());
+                : Constants.EmptyDiscount);
         }
     }
 }
