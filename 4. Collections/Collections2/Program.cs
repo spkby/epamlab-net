@@ -8,10 +8,11 @@ namespace Collections2
     internal class Program
     {
         private const string path = @"..\..\in.txt";
-        private const string patterRealNumber = @"(\-?\d*,?\d*e?[+|-]?\d*)";
+        private const string patterRealNumber = @"(\-?\d+,?\d*e?[+|-]?\d*)";
+        private const string fileNotFound = "File not found";
 
-        private const string pattern = @"\(\s*" + patterRealNumber + @"\s*;\s*" + patterRealNumber + @"\s*\)\s*\(\s*" +
-                                       patterRealNumber + @"\s*;\s*" + patterRealNumber + @"\s*\)";
+        private const string pattern = @"\s*\(\s*" + patterRealNumber + @"\s*;\s*" + patterRealNumber + @"\s*\)\s*\(\s*" +
+                                       patterRealNumber + @"\s*;\s*" + patterRealNumber + @"\s*\)\s*";
 
         private const int positionX1 = 1; 
         private const int positionX2 = 2; 
@@ -28,9 +29,7 @@ namespace Collections2
                     string line;
                     while ((line = sr.ReadLine()) != null)
                     {
-                        var regex = new Regex(pattern);
-                        var strings = regex.Split(line);
-
+                        var strings = new Regex(pattern).Split(line);
                         var x1 = double.Parse(strings[positionX1]);
                         var x2 = double.Parse(strings[positionX2]);
                         var y1 = double.Parse(strings[positionY1]);
@@ -41,9 +40,8 @@ namespace Collections2
             }
             catch (FileNotFoundException)
             {
-                Console.WriteLine("File not found");
+                Console.WriteLine(fileNotFound);
             }
-            
             Console.WriteLine(lines.Print());
         }
     }
