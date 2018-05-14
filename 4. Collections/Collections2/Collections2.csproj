@@ -38,7 +38,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NumLenComparator.cs" />
+    <Compile Include="NumComparator.cs" />
     <Compile Include="LenNum.cs" />
     <Compile Include="LenNumCollections.cs" />
     <Compile Include="Program.cs" />
