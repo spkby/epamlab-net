@@ -8,11 +8,8 @@ namespace Collections2
     internal class Program
     {
         private const string path = @"..\..\in.txt";
-        private const string patterRealNumber = @"(\-?\d+,?\d*e?[+|-]?\d*)";
         private const string fileNotFound = "File not found";
-
-        private const string pattern = @"\s*\(\s*" + patterRealNumber + @"\s*;\s*" + patterRealNumber + @"\s*\)\s*\(\s*" +
-                                       patterRealNumber + @"\s*;\s*" + patterRealNumber + @"\s*\)\s*";
+        private const string pattern = @"[\s(;)]+";
 
         private const int positionX1 = 1; 
         private const int positionX2 = 2; 
