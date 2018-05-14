@@ -5,30 +5,29 @@ namespace Collections2
 {
     public class LenNumCollections
     {
-        private List<LenNum> collections;
+        private readonly List<LenNum> collections;
 
         public LenNumCollections()
         {
             collections = new List<LenNum>();
         }
 
-        public void Add(int len)
+        public void Add(LenNum lenNum)
         {
-            var index = Search(len);
+            var index = Search(lenNum);
             if (index >= 0)
             {
-                collections[index].Increment();
+                collections[index].IncNum();
             }
             else
             {
-                collections.Add(new LenNum(len));
+                collections.Insert(-index - 1, lenNum);
             }
         }
 
-        public int Search(int len)
+        private int Search(LenNum lenNum)
         {
-            collections.Sort(new LenComparator());
-            return collections.BinarySearch(new LenNum(len), new LenComparator());
+            return collections.BinarySearch(lenNum);
         }
 
         public string Print()

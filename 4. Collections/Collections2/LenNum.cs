@@ -1,6 +1,8 @@
-﻿namespace Collections2
+﻿using System;
+
+namespace Collections2
 {
-    public class LenNum
+    public class LenNum : IComparable<LenNum>
     {
         public readonly int Len;
         public int Num { get; private set; }
@@ -11,9 +13,14 @@
             Num = 1;
         }
 
-        public void Increment()
+        public void IncNum()
         {
             Num++;
+        }
+
+        public int CompareTo(LenNum other)
+        {
+            return (Len - other.Len);
         }
 
         public override string ToString()
