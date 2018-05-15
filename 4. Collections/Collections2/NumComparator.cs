@@ -6,7 +6,7 @@ namespace Collections2
     {
         public int Compare(LenNum x, LenNum y)
         {
-            return y.Num - x.Num;
+            return (y.Num - x.Num);
         }
     }
 }
