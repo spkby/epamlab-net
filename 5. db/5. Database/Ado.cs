@@ -16,6 +16,7 @@ namespace Database
         private const string selectWhereLenMoreThanNum =
             "SELECT len,num FROM Frequencies WHERE len > num";
 
+        private const string errorDeleteFromFrequencies = "Error delete from Frequencies";
 
         private static OleDbCommand cmd;
 
@@ -67,7 +68,8 @@ namespace Database
                 var res = cmd.ExecuteNonQuery();
                 if (res == -1)
                 {
-                    throw new Exception("Error delete from Frequencies");
+                    
+                    throw new Exception(errorDeleteFromFrequencies);
                 }
             }
             catch (OleDbException e)
