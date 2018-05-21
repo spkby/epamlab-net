@@ -21,6 +21,8 @@ namespace Database
             {
                 Console.WriteLine(lenNum);
             }
+
+            Console.Read();
         }
     }
 }

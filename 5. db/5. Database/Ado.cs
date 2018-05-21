@@ -10,8 +10,10 @@ namespace Database
         private const string clear = "delete from Frequencies";
 
         private const string selectLenNum =
-            "SELECT ((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2)) AS len, Count(*) AS num FROM Coordinates" +
-            " GROUP BY x1,x2,y1,y2 ORDER BY len";
+            "SELECT ABS(x1 - x2) AS len, COUNT(*) AS num"
++"FROM Coordinates"
++ "GROUP BY x1, x2"
++ "ORDER BY ABS(x1 - x2)";
 
         private const string selectWhereLenMoreThanNum =
             "SELECT len,num FROM Frequencies WHERE len > num";
