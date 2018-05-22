@@ -16,13 +16,11 @@ namespace Database
             Ado.Insert(listLenNums, conn);
 
             var listWhereLenMoreThanNum = Ado.GetWhereLenMoreThanNum(conn);
-
+            Console.WriteLine("len > num");
             foreach (var lenNum in listWhereLenMoreThanNum)
             {
                 Console.WriteLine(lenNum);
             }
-
-            Console.Read();
         }
     }
 }

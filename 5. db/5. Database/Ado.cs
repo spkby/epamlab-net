@@ -10,10 +10,10 @@ namespace Database
         private const string clear = "delete from Frequencies";
 
         private const string selectLenNum =
-            "SELECT ABS(x1 - x2) AS len, COUNT(*) AS num"
-+"FROM Coordinates"
-+ "GROUP BY x1, x2"
-+ "ORDER BY ABS(x1 - x2)";
+            "SELECT ABS(CInt(x1 + 0.5) - CInt(x2 + 0.5)) AS len, COUNT(*) AS num"
+            + " FROM Coordinates"
+            + " GROUP BY x1, x2"
+            + " ORDER BY ABS(CInt(x1 + 0.5) - CInt(x2 + 0.5))";
 
         private const string selectWhereLenMoreThanNum =
             "SELECT len,num FROM Frequencies WHERE len > num";
@@ -37,15 +37,15 @@ namespace Database
             {
                 cmd = new OleDbCommand(selectLenNum, conn);
                 conn.Open();
-                
+
                 // TODO: ! No value given for one or more required parameters.
 
                 var dataReader = cmd.ExecuteReader();
 
                 while (dataReader != null && dataReader.Read())
                 {
-                    var len = dataReader.GetInt32(0);
-                    var num = dataReader.GetInt32(1);
+                    var len = int.Parse(dataReader["len"].ToString());
+                    var num = int.Parse(dataReader["num"].ToString());
                     list.Add(new LenNum(len, num));
                 }
             }
@@ -70,7 +70,6 @@ namespace Database
                 var res = cmd.ExecuteNonQuery();
                 if (res == -1)
                 {
-                    
                     throw new Exception(errorDeleteFromFrequencies);
                 }
             }
