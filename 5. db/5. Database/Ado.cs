@@ -8,12 +8,14 @@ namespace Database
     {
         private const string insert = "insert into Frequencies (len,num) values (@len,@num)";
         private const string clear = "delete from Frequencies";
+        private const string calcLen = "CInt(ABS(x1 - x2) + 0.5)";
 
         private const string selectLenNum =
-            "SELECT ABS(CInt(x1 + 0.5) - CInt(x2 + 0.5)) AS len, COUNT(*) AS num"
+            "SELECT " + calcLen + " AS len, COUNT(*) AS num"
             + " FROM Coordinates"
-            + " GROUP BY x1, x2"
-            + " ORDER BY ABS(CInt(x1 + 0.5) - CInt(x2 + 0.5))";
+            + " GROUP BY " + calcLen
+            + " HAVING " + calcLen + " > 0"
+            + " ORDER BY " + calcLen;
 
         private const string selectWhereLenMoreThanNum =
             "SELECT len,num FROM Frequencies WHERE len > num";
@@ -37,8 +39,6 @@ namespace Database
             {
                 cmd = new OleDbCommand(selectLenNum, conn);
                 conn.Open();
-
-                // TODO: ! No value given for one or more required parameters.
 
                 var dataReader = cmd.ExecuteReader();
 
