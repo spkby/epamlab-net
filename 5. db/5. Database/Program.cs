@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data.OleDb;
 
 namespace Database
 {
@@ -6,20 +8,46 @@ namespace Database
     {
         public static void Main(string[] args)
         {
-            var path = System.Environment.CurrentDirectory + @"\..\..\";
-            Console.WriteLine(path);
+            var path = Environment.CurrentDirectory + @"\..\..\";
+            /* 
+             * Environment.CurrentDirectory - need for ConnectionString.
+             * If path without Environment.CurrentDirectory, ConnectionString is wrong.
+            */
 
-            var conn = Ado.GetConnection(path);
+            OleDbConnection conn = Ado.GetConnection(path);
 
-            var listLenNums = Ado.GetList(conn);
-
-            Ado.Insert(listLenNums, conn);
-
-            var listWhereLenMoreThanNum = Ado.GetWhereLenMoreThanNum(conn);
-            Console.WriteLine("len > num");
-            foreach (var lenNum in listWhereLenMoreThanNum)
+            try
             {
-                Console.WriteLine(lenNum);
+                conn.Open();
+
+                List<LenNum> listLenNums = Ado.GetList(conn);
+
+                Ado.Insert(listLenNums, conn);
+
+                List<LenNum> listWhereLenMoreThanNum = Ado.GetWhereLenMoreThanNum(conn);
+
+                Console.WriteLine("len > num");
+                foreach (LenNum lenNum in listWhereLenMoreThanNum)
+                {
+                    Console.WriteLine(lenNum);
+                }
+            }
+            catch (OleDbException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (DbException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+
+                Console.Read();
             }
         }
     }

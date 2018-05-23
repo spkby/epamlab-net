@@ -8,19 +8,24 @@ namespace Database
     {
         private const string insert = "insert into Frequencies (len,num) values (@len,@num)";
         private const string clear = "delete from Frequencies";
-        private const string calcLen = "CInt(ABS(x1 - x2) + 0.5)";
+        private const string calcLen = "Int(ABS(x1 - x2) + 0.5)";
 
         private const string selectLenNum =
             "SELECT " + calcLen + " AS len, COUNT(*) AS num"
             + " FROM Coordinates"
             + " GROUP BY " + calcLen
-            + " HAVING " + calcLen + " > 0"
+            + " HAVING " + calcLen + " > 0" 
             + " ORDER BY " + calcLen;
+        
+        /*
+         * Having use for group by field 'len' and group only if field 'len' are not empty
+         */
 
         private const string selectWhereLenMoreThanNum =
             "SELECT len,num FROM Frequencies WHERE len > num";
 
         private const string errorDeleteFromFrequencies = "Error delete from Frequencies";
+        private const string errorInsertIntoFrequencies = "Error insert into Frequencies";
 
         private static OleDbCommand cmd;
 
@@ -31,31 +36,26 @@ namespace Database
             return new OleDbConnection(connectionString);
         }
 
-        public static IEnumerable<LenNum> GetList(OleDbConnection conn)
+        public static List<LenNum> GetList(OleDbConnection conn)
         {
-            var list = new List<LenNum>();
+            List<LenNum> list = new List<LenNum>();
 
             try
             {
                 cmd = new OleDbCommand(selectLenNum, conn);
-                conn.Open();
 
-                var dataReader = cmd.ExecuteReader();
+                OleDbDataReader dataReader = cmd.ExecuteReader();
 
                 while (dataReader != null && dataReader.Read())
                 {
-                    var len = int.Parse(dataReader["len"].ToString());
-                    var num = int.Parse(dataReader["num"].ToString());
+                    int len = (int) dataReader.GetDouble(0);
+                    int num = dataReader.GetInt32(1);
                     list.Add(new LenNum(len, num));
                 }
             }
             catch (OleDbException e)
             {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                conn.Close();
+                throw new DbException(e.Message);
             }
 
             return list;
@@ -66,77 +66,73 @@ namespace Database
             try
             {
                 cmd = new OleDbCommand(clear, conn);
-                conn.Open();
-                var res = cmd.ExecuteNonQuery();
+
+                int res = cmd.ExecuteNonQuery();
                 if (res == -1)
                 {
-                    throw new Exception(errorDeleteFromFrequencies);
+                    throw new DbException(errorDeleteFromFrequencies);
                 }
             }
             catch (OleDbException e)
             {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                conn.Close();
+                throw new DbException(e.Message);
             }
         }
 
-        public static void Insert(IEnumerable<LenNum> list, OleDbConnection conn)
+        public static void Insert(List<LenNum> list, OleDbConnection conn)
         {
             try
             {
                 Clear(conn);
+                cmd = new OleDbCommand(insert, conn);
 
-                conn.Open();
+                OleDbParameter len = new OleDbParameter();
+                OleDbParameter num = new OleDbParameter();
 
-                foreach (var lenNum in list)
+                len.ParameterName = "@len";
+                num.ParameterName = "@num";
+
+                cmd.Parameters.Add(len);
+                cmd.Parameters.Add(num);
+
+                foreach (LenNum lenNum in list)
                 {
-                    cmd = new OleDbCommand(insert, conn);
-                    cmd.Parameters.AddWithValue("@len", lenNum.Len);
-                    cmd.Parameters.AddWithValue("@num", lenNum.Num);
-                    var res = cmd.ExecuteNonQuery();
+                    len.Value = lenNum.Len;
+                    num.Value = lenNum.Num;
+
+                    int res = cmd.ExecuteNonQuery();
                     if (res == -1)
                     {
-                        Console.WriteLine("Error insert");
+                        throw new DbException(errorInsertIntoFrequencies);
                     }
                 }
             }
             catch (OleDbException e)
             {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                conn.Close();
+                throw new DbException(e.Message);
             }
         }
 
-        public static IEnumerable<LenNum> GetWhereLenMoreThanNum(OleDbConnection conn)
+        public static List<LenNum> GetWhereLenMoreThanNum(OleDbConnection conn)
         {
-            var list = new List<LenNum>();
+            List<LenNum> list = new List<LenNum>();
 
             try
             {
                 cmd = new OleDbCommand(selectWhereLenMoreThanNum, conn);
-                conn.Open();
-                var dataReader = cmd.ExecuteReader();
+
+                OleDbDataReader dataReader = cmd.ExecuteReader();
 
                 while (dataReader != null && dataReader.Read())
                 {
-                    var len = dataReader.GetInt32(0);
-                    var num = dataReader.GetInt32(1);
+                    int len = dataReader.GetInt32(0);
+                    int num = dataReader.GetInt32(1);
                     list.Add(new LenNum(len, num));
                 }
             }
             catch (OleDbException e)
             {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                conn.Close();
+                throw new DbException(e.Message);
             }
 
             return list;
