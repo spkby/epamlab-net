@@ -22,7 +22,7 @@
             }
         }
 
-        var Purchase = function (name, price, number) {
+        function Purchase(name, price, number) {
             this.name = name;
             this.price = price;
             this.number = number;
@@ -34,7 +34,7 @@
             }
         }
 
-        var PercentDiscountPurchase = function (name, price, number, percent) {
+        function PercentDiscountPurchase(name, price, number, percent) {
             Purchase.apply(this, arguments);
             this.percent = percent;
 
