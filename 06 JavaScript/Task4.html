@@ -9,30 +9,14 @@
     <h1>Task 4 - start</h1>
     <script>
 
-        var getByn = function (price) {
-            var str = String(price);
-
-            switch (str.length) {
-                case 1:
-                    return "0.0" + str;
-                case 2:
-                    return "0." + str;
-                default:
-                    return str.substring(0, str.length - 2) + "." + str.substring(str.length - 2);
-            }
+        function getByn(price) {
+            return parseInt(price / 100) + "." + parseInt(price / 10 % 10) + parseInt(price % 10)
         }
 
         function Purchase(name, price, number) {
             this.name = name;
             this.price = price;
             this.number = number;
-
-            /*this.getCost = function () {
-                return this.price * this.number
-            }
-            this.toString = function () {
-                return this.name + ";" + getByn(this.price) + ";" + this.number + ";" + getByn(this.getCost())
-            }*/
         }
 
         Purchase.prototype.getCost = function () {
@@ -92,14 +76,14 @@
             });
         }
 
-        document.writeln("<h2>Purchases</h2>");
+        document.writeln("<h3>Purchases</h3>");
         printPurchase(purchases);
 
-        document.writeln("<h2>Purchases with Cost is more than 20</h2>");
+        document.writeln("<h3>Purchases with Cost is more than 20</h3>");
         purchasesFiltered = purchases.filter(p => p.getCost() > 20);
         printPurchase(purchasesFiltered);
 
-        document.writeln("<h2>Purchases => PercentDiscountPurchase</h2>");
+        document.writeln("<h3>Purchases => PercentDiscountPurchase</h3>");
         purchasesMaped = purchases.map(function (p) {
             if ((p instanceof PercentDiscountPurchase) || (p instanceof PriceDiscountPurchase)) {
                 return p;
@@ -115,19 +99,19 @@
         }
 
         if (purchases.every(moreThan50)) {
-            document.writeln("<h2>Cost in all purchases is more than 50</h2>");
+            document.writeln("<h3>Cost in all purchases is more than 50</h3>");
         } else {
-            document.writeln("<h2>Cost not in all purchases is more than 50</h2>");
+            document.writeln("<h3>Cost not in all purchases is more than 50</h3>");
         }
 
         if (purchases.some(moreThan50)) {
-            document.writeln("<h2>In all purchases there are purchases with a cost of more than 50</h2>");
+            document.writeln("<h3>In all purchases there are purchases with a cost of more than 50</h3>");
         } else {
-            document.writeln("<h2>All purchases do not have a purchase with a cost greater than 50</h2>");
+            document.writeln("<h3>All purchases do not have a purchase with a cost greater than 50</h3>");
         }
 
         maxPurchase = purchases.reduce((acc, val) => acc.getCost() < val.getCost() ? val : acc);
-        document.writeln("<h2>Max purchase is " + maxPurchase.toString() + "</h2>");
+        document.writeln("<h3>Max purchase is " + maxPurchase.toString() + "</h3>");
 
         newPurchase = purchases.reduceRight(
             (prev, curr) => new Purchase(
@@ -135,7 +119,7 @@
                 prev.price > curr.price ? prev.price : curr.price,
                 prev.number < curr.number ? prev.number : curr.number,
             ));
-        document.writeln("<h2>New purchase is " + newPurchase.toString() + "</h2>");
+        document.writeln("<h3>New purchase is " + newPurchase.toString() + "</h3>");
 
     </script>
     <h1>Task 4 - end</h1>
