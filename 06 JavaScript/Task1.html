@@ -22,16 +22,14 @@
             }
         }
 
-        class Purchase {
-            constructor(name, price, number) {
-                this.name = name;
-                this.price = price;
-                this.number = number;
-            }
-            getCost() {
+        var Purchase = function (name, price, number) {
+            this.name = name;
+            this.price = price;
+            this.number = number;
+            this.getCost = function () {
                 return this.price * this.number
             }
-            toString() {
+            this.toString = function () {
                 return this.name + ";" + getByn(this.price) + ";" + this.number + ";" + getByn(this.getCost())
             }
         }

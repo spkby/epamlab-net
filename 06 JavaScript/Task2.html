@@ -22,30 +22,30 @@
             }
         }
 
-        class Purchase {
-            constructor(name, price, number) {
-                this.name = name;
-                this.price = price;
-                this.number = number;
-            }
-            getCost() {
+        var Purchase = function (name, price, number) {
+            this.name = name;
+            this.price = price;
+            this.number = number;
+            this.getCost = function () {
                 return this.price * this.number
             }
-            toString() {
+            this.toString = function () {
                 return this.name + ";" + getByn(this.price) + ";" + this.number + ";" + getByn(this.getCost())
             }
         }
 
-        class PercentDiscountPurchase extends Purchase {
-            constructor(name, price, number, percent) {
-                super(name, price, number);
-                this.percent = percent;
+        var PercentDiscountPurchase = function (name, price, number, percent) {
+            Purchase.apply(this, arguments);
+            this.percent = percent;
+
+            var parentGetCost = this.getCost;
+            this.getCost = function () {
+                return parseInt(parentGetCost.call(this) * (1.0 - this.percent / 100.0));
             }
-            getCost() {
-                return parseInt(super.getCost() * (1.0 - this.percent / 100.0));
-            }
-            toString() {
-                return super.toString() + ";" + this.percent
+
+            var parentToString = this.toString;
+            this.toString = function () {
+                return parentToString.call(this) + ";" + this.percent;
             }
         }
 
