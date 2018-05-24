@@ -1,0 +1,144 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+
+<body>
+    <h1>Task 4 - start</h1>
+    <script>
+
+        var getByn = function (price) {
+            var str = String(price);
+
+            switch (str.length) {
+                case 1:
+                    return "0.0" + str;
+                case 2:
+                    return "0." + str;
+                default:
+                    return str.substring(0, str.length - 2) + "." + str.substring(str.length - 2);
+            }
+        }
+
+        function Purchase(name, price, number) {
+            this.name = name;
+            this.price = price;
+            this.number = number;
+
+            /*this.getCost = function () {
+                return this.price * this.number
+            }
+            this.toString = function () {
+                return this.name + ";" + getByn(this.price) + ";" + this.number + ";" + getByn(this.getCost())
+            }*/
+        }
+
+        Purchase.prototype.getCost = function () {
+            return this.price * this.number
+        }
+        Purchase.prototype.toString = function () {
+            return this.name + ";" + getByn(this.price) + ";" + this.number + ";" + getByn(this.getCost())
+        }
+
+        function PriceDiscountPurchase(name, price, number, discount) {
+            Purchase.apply(this, arguments);
+            this.discount = discount;
+        }
+
+        PriceDiscountPurchase.prototype = Object.create(Purchase.prototype);
+        PriceDiscountPurchase.prototype.constructor = PriceDiscountPurchase;
+
+        PriceDiscountPurchase.prototype.getCost = function () {
+            return Purchase.prototype.getCost.apply(this) - this.discount;
+        }
+        PriceDiscountPurchase.prototype.toString = function () {
+            return Purchase.prototype.toString.apply(this) + ";" + getByn(this.discount)
+        }
+
+        var PercentDiscountPurchase = function (name, price, number, percent) {
+            Purchase.apply(this, arguments);
+            this.percent = percent;
+
+            var parentGetCost = Purchase.prototype.getCost;
+            this.getCost = function () {
+                return parseInt(parentGetCost.call(this) * (1.0 - this.percent / 100.0));
+            }
+
+            var parentToString = Purchase.prototype.toString;
+            this.toString = function () {
+                return parentToString.call(this) + ";" + this.percent;
+            }
+        }
+
+        var purchases = [
+            new Purchase("apple", 121, 5),
+            new Purchase("milk", 101, 3),
+            new Purchase("bread", 320, 4),
+            new Purchase("potato", 19, 1),
+            new PriceDiscountPurchase("carrot", 99, 3, 5),
+            new PriceDiscountPurchase("fish", 399, 3, 55),
+            new PriceDiscountPurchase("lobster", 999, 1, 99),
+            new PercentDiscountPurchase("nuts", 123, 3, 4),
+            new PercentDiscountPurchase("cheese", 536, 3, 3),
+            new PercentDiscountPurchase("oil", 568, 2, 5)
+        ];
+
+
+        function printPurchase(array) {
+            array.forEach(function (a) {
+                document.writeln("<p>" + a.toString());
+            });
+        }
+
+        document.writeln("<h2>Purchases</h2>");
+        printPurchase(purchases);
+
+        document.writeln("<h2>Purchases with Cost is more than 20</h2>");
+        purchasesFiltered = purchases.filter(p => p.getCost() > 20);
+        printPurchase(purchasesFiltered);
+
+        document.writeln("<h2>Purchases => PercentDiscountPurchase</h2>");
+        purchasesMaped = purchases.map(function (p) {
+            if ((p instanceof PercentDiscountPurchase) || (p instanceof PriceDiscountPurchase)) {
+                return p;
+            }
+            else {
+                return new PercentDiscountPurchase(p.name, p.price, p.number, p.number * 2);
+            }
+        });
+        printPurchase(purchasesMaped);
+
+        function moreThan50(purchase) {
+            return purchase.getCost() > 50
+        }
+
+        if (purchases.every(moreThan50)) {
+            document.writeln("<h2>Cost in all purchases is more than 50</h2>");
+        } else {
+            document.writeln("<h2>Cost not in all purchases is more than 50</h2>");
+        }
+
+        if (purchases.some(moreThan50)) {
+            document.writeln("<h2>In all purchases there are purchases with a cost of more than 50</h2>");
+        } else {
+            document.writeln("<h2>All purchases do not have a purchase with a cost greater than 50</h2>");
+        }
+
+        maxPurchase = purchases.reduce((acc, val) => acc.getCost() < val.getCost() ? val : acc);
+        document.writeln("<h2>Max purchase is " + maxPurchase.toString() + "</h2>");
+
+        newPurchase = purchases.reduceRight(
+            (prev, curr) => new Purchase(
+                prev.name.length > curr.name.length ? prev.name : curr.name,
+                prev.price > curr.price ? prev.price : curr.price,
+                prev.number < curr.number ? prev.number : curr.number,
+            ));
+        document.writeln("<h2>New purchase is " + newPurchase.toString() + "</h2>");
+
+    </script>
+    <h1>Task 4 - end</h1>
+</body>
+
+</html>
