@@ -1,0 +1,86 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+
+<body>
+    <h1>Task 3 - start</h1>
+    <script>
+
+        var getByn = function (price) {
+            var str = String(price);
+
+            switch (str.length) {
+                case 1:
+                    return "0.0" + str;
+                case 2:
+                    return "0." + str;
+                default:
+                    return str.substring(0, str.length - 2) + "." + str.substring(str.length - 2);
+            }
+        }
+
+        function Purchase(name, price, number) {
+            this.name = name;
+            this.price = price;
+            this.number = number;
+        }
+
+        Purchase.prototype.getCost = function () {
+            return this.price * this.number
+        }
+        Purchase.prototype.toString = function () {
+            return this.name + ";" + getByn(this.price) + ";" + this.number + ";" + getByn(this.getCost())
+        }
+
+        function PriceDiscountPurchase(name, price, number, discount) {
+            Purchase.apply(this, arguments);
+            this.discount = discount;
+        }
+
+        PriceDiscountPurchase.prototype = Object.create(Purchase.prototype);
+        PriceDiscountPurchase.prototype.constructor = PriceDiscountPurchase;
+
+        PriceDiscountPurchase.prototype.getCost = function () {
+            return Purchase.prototype.getCost.apply(this) - this.discount;
+        }
+        PriceDiscountPurchase.prototype.toString = function () {
+            return Purchase.prototype.toString.apply(this) + ";" + getByn(this.discount)
+        }
+
+        var purchases = [
+            new Purchase("apple", 121, 5),
+            new Purchase("milk", 101, 3),
+            new Purchase("bread", 320, 4),
+            new Purchase("potato", 122, 1),
+            new PriceDiscountPurchase("carrot", 99, 3, 5),
+            new PriceDiscountPurchase("lobster", 999, 1, 99)
+        ];
+
+        document.writeln("<h2>Purchases</h2>");
+        for (var i = 0; i < purchases.length; i++) {
+            document.writeln("<p>" + purchases[i].toString());
+        }
+
+        var totalCost = 0;
+        var makeS = function (Purchase) {
+            totalCost += Purchase.getCost();
+        }
+
+        for (let index = 0; index < purchases.length; index++) {
+            makeS(purchases[index]);
+        }
+
+        var makeS = function () {
+            return getByn(totalCost);
+        }
+        document.writeln("<h2>Total cost</h2>");
+        document.writeln("<h2>" + makeS() + "</h2>");
+
+    </script>
+    <h1>Task 3 - end</h1>
+</body>
+
+</html>
