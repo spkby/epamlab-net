@@ -10,16 +10,8 @@ namespace Database
         private const string clear = "delete from Frequencies";
         private const string calcLen = "Int(ABS(x1 - x2) + 0.5)";
 
-        private const string selectLenNum =
-            "SELECT " + calcLen + " AS len, COUNT(*) AS num"
-            + " FROM Coordinates"
-            + " GROUP BY " + calcLen
-            + " HAVING " + calcLen + " > 0" 
-            + " ORDER BY " + calcLen;
-        
-        /*
-         * Having use for group by field 'len' and group only if field 'len' are not empty
-         */
+        private const string selectLenNum = "SELECT " + calcLen + " AS len, Count(*) AS num"
+                                            + " FROM Coordinates GROUP BY " + calcLen + " ORDER BY 1";
 
         private const string selectWhereLenMoreThanNum =
             "SELECT len,num FROM Frequencies WHERE len > num";
