@@ -9,17 +9,8 @@
     <h1>Task 3 - start</h1>
     <script>
 
-        var getByn = function (price) {
-            var str = String(price);
-
-            switch (str.length) {
-                case 1:
-                    return "0.0" + str;
-                case 2:
-                    return "0." + str;
-                default:
-                    return str.substring(0, str.length - 2) + "." + str.substring(str.length - 2);
-            }
+        function getByn(price) {
+            return parseInt(price / 100) + "." + parseInt(price / 10 % 10) + parseInt(price % 10)
         }
 
         function Purchase(name, price, number) {
@@ -65,18 +56,19 @@
             document.writeln("<p>" + purchases[i].toString());
         }
 
-        var totalCost = 0;
-        var makeS = function (Purchase) {
-            totalCost += Purchase.getCost();
-        }
-
-        for (let index = 0; index < purchases.length; index++) {
-            makeS(purchases[index]);
-        }
-
         var makeS = function () {
+            var totalCost = 0;
+
+            var calcCost = function (Purchase) {
+                totalCost += Purchase.getCost();
+            }
+
+            for (let index = 0; index < purchases.length; index++) {
+                calcCost(purchases[index]);
+            }
             return getByn(totalCost);
         }
+        
         document.writeln("<h3>Total cost</h3>");
         document.writeln("<h3>" + makeS() + "</h3>");
 

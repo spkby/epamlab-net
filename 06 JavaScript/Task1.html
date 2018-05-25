@@ -37,18 +37,19 @@
             document.writeln("<p>" + purchases[i].toString());
         }
 
-        var totalCost = 0;
-        var makeS = function (Purchase) {
-            totalCost += Purchase.getCost();
-        }
-
-        for (let index = 0; index < purchases.length; index++) {
-            makeS(purchases[index]);
-        }
-
         var makeS = function () {
+            var totalCost = 0;
+            
+            var calcCost = function (Purchase) {
+                totalCost += Purchase.getCost();
+            }
+
+            for (let index = 0; index < purchases.length; index++) {
+                calcCost(purchases[index]);
+            }
             return getByn(totalCost);
         }
+
         document.writeln("<h3>Total cost</h3>");
         document.writeln("<h3>" + makeS() + "</h3>");
 
