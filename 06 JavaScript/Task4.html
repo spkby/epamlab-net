@@ -45,14 +45,12 @@
             Purchase.apply(this, arguments);
             this.percent = percent;
 
-            var parentGetCost = Purchase.prototype.getCost;
             this.getCost = function () {
-                return parseInt(parentGetCost.call(this) * (1.0 - this.percent / 100.0));
+                return parseInt(Purchase.prototype.getCost.call(this) * (1.0 - this.percent / 100.0));
             }
 
-            var parentToString = Purchase.prototype.toString;
             this.toString = function () {
-                return parentToString.call(this) + ";" + this.percent;
+                return Purchase.prototype.toString.call(this) + ";" + this.percent;
             }
         }
 
@@ -68,7 +66,6 @@
             new PercentDiscountPurchase("cheese", 536, 3, 3),
             new PercentDiscountPurchase("oil", 568, 2, 5)
         ];
-
 
         function printPurchase(array) {
             array.forEach(function (a) {

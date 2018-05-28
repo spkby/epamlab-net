@@ -37,21 +37,22 @@
             document.writeln("<p>" + purchases[i].toString());
         }
 
-        var makeS = function () {
-            var totalCost = 0;
-            
-            var calcCost = function (Purchase) {
-                totalCost += Purchase.getCost();
-            }
+        var totalCost = function () {
+            var cost = 0;
 
-            for (let index = 0; index < purchases.length; index++) {
-                calcCost(purchases[index]);
+            return function (Purchase) {
+                return Purchase === undefined ? cost : cost += Purchase.getCost();
             }
-            return getByn(totalCost);
+        }
+
+        var makeS = totalCost();
+
+        for (let index = 0; index < purchases.length; index++) {
+            makeS(purchases[index]);
         }
 
         document.writeln("<h3>Total cost</h3>");
-        document.writeln("<h3>" + makeS() + "</h3>");
+        document.writeln("<h3>" + getByn(makeS()) + "</h3>");
 
     </script>
     <h1>Task 1 - end</h1>
