@@ -1,4 +1,3 @@
-
 var accItem = $('.menuItem');
 
 var accHD = $('.menuItemHeading');
@@ -11,6 +10,7 @@ function toggleItem() {
     var itemClass = this.parentNode.className;
 
     for (i = 0; i < accItem.length; i++) {
+        $('#' + i).empty();
         accItem[i].className = 'menuItem close';
     }
 
@@ -24,8 +24,6 @@ function toggleItem() {
                 id = i;
             }
         }
-
-        $('#'+id).text("<p>Test" + id + "</p>");
-
+        $('#' + id).append("<p>Test" + id + "</p>");
     }
 }
