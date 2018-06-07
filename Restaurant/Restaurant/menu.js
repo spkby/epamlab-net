@@ -1,3 +1,7 @@
+function toByn(price) {
+    return parseInt(price / 100) + "." + parseInt(price / 10 % 10) + parseInt(price % 10)
+}
+
 var accItem = $('.menuItem');
 
 var accHD = $('.menuItemHeading');
@@ -13,7 +17,7 @@ function getItems(id) {
         if (this.readyState == 4 && this.status == 200) {
             var items = JSON.parse(this.responseText);
             items.forEach(element => {
-                $('#' + id).append('<h2>' + element.title + '</h2>' + '<p>' + element.desc + '</p>' + '<p>' + element.price + '</p>');
+                $('#' + id).append('<h2>' + element.Dishname + '</h2>' + '<p>' + element.Desc + '</p>' + '<p>' + toByn(element.Price) + ' BYN</p>');
             });
         }
     };
