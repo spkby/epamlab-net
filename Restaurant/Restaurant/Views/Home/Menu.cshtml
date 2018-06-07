@@ -1,7 +1,44 @@
 ﻿@{
-    ViewBag.Title = "About";
+    ViewBag.Title = "Menu";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<article>
+    <div class="menuWrapper">
+        <h1>Menu Restaurant</h1>
+        <div class="menuItem close">
+            <h2 class="menuItemHeading">Appetizer</h2>
+            <div class="menuItemContent">
+                <div id="0"></div>
+            </div>
+        </div>
 
-<p>Use this area to provide additional information.</p>
+        <div class="menuItem close">
+            <h2 class="menuItemHeading">Salads</h2>
+            <div class="menuItemContent">
+                <div id="1"></div>
+            </div>
+        </div>
+
+        <div class="menuItem close">
+            <h2 class="menuItemHeading">Tapas</h2>
+            <div class="menuItemContent">
+                <div id="2"></div>
+            </div>
+        </div>
+
+        <div class="menuItem close">
+            <h2 class="menuItemHeading">Entrees</h2>
+            <div class="menuItemContent">
+                <div id="3"></div>
+            </div>
+        </div>
+
+        <div class="menuItem close">
+            <h2 class="menuItemHeading">Beverages</h2>
+            <div class="menuItemContent">
+                <div id="4"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/menu.js"></script>
+</article>

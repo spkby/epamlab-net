@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
+using Restaurant.Models;
 
 namespace Restaurant.Controllers
 {
@@ -14,16 +15,21 @@ namespace Restaurant.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Menu()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "MEnu";
 
             return View();
         }
 
-        public ActionResult Contact()
-        {
-            return Json(new {id = "id", name = "Blech"},JsonRequestBehavior.AllowGet);
+        public ActionResult GetItems()
+        { 
+            List<Dish> dishes = new List<Dish>();
+            
+            dishes.Add(new Dish("fish","shark",100));
+            dishes.Add(new Dish("meat","beaf",200));
+            
+            return Json(dishes, JsonRequestBehavior.AllowGet);
         }
     }
 }
