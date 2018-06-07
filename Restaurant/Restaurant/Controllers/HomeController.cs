@@ -21,7 +21,7 @@ namespace Restaurant.Controllers
         }
 
         public ActionResult GetItems(int? id)
-        { 
+        {
             List<Dish> dishes = new List<Dish>();
 
             switch (id)
@@ -39,7 +39,8 @@ namespace Restaurant.Controllers
                     dishes.Add(new Dish("meat", "beaf", 200));
                     break;
             }
-                    return Json(dishes, JsonRequestBehavior.AllowGet);
+
+            return Json(dishes, JsonRequestBehavior.AllowGet);
         }
     }
 }
