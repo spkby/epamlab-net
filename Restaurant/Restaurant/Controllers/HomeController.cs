@@ -17,19 +17,29 @@ namespace Restaurant.Controllers
 
         public ActionResult Menu()
         {
-            ViewBag.Message = "MEnu";
-
             return View();
         }
 
-        public ActionResult GetItems()
+        public ActionResult GetItems(int? id)
         { 
             List<Dish> dishes = new List<Dish>();
-            
-            dishes.Add(new Dish("fish","shark",100));
-            dishes.Add(new Dish("meat","beaf",200));
-            
-            return Json(dishes, JsonRequestBehavior.AllowGet);
+
+            switch (id)
+            {
+                case 0:
+                    dishes.Add(new Dish("0fish", "shark", 100));
+                    dishes.Add(new Dish("0meat", "beaf", 200));
+                    break;
+                case 1:
+                    dishes.Add(new Dish("1fish", "shark", 100));
+                    dishes.Add(new Dish("1meat", "beaf", 200));
+                    break;
+                default:
+                    dishes.Add(new Dish("fish", "shark", 100));
+                    dishes.Add(new Dish("meat", "beaf", 200));
+                    break;
+            }
+                    return Json(dishes, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -18,7 +18,7 @@ function getItems(id) {
         }
     };
 
-    request.open('GET', '/Home/GetItems/');
+    request.open('GET', '/Home/GetItems/'+id);
     request.send();
 }
 
