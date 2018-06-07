@@ -7,18 +7,18 @@ for (i = 0; i < accHD.length; i++) {
 }
 
 function getItems(id) {
-
     var request = new XMLHttpRequest();
-    request.open('GET', 'http://localhost:5000/Home/Contact', true);
+
     request.onreadystatechange = function () {
-        if (this.readyState == 4) {
-            if (this.status == 200 || this.status == 0) {
-                alert(this.responseText)
-                $('#' + id).append("<p>" + obj.name + "</p>")
-            }
-            else alert('Error: ' + this.statusText)
+        if (this.readyState == 4 && this.status == 200) {
+            var items = JSON.parse(this.responseText);
+            items.forEach(element => {
+                $('#' + id).append('<h2>' + element.title + '</h2>' + '<p>' + element.desc + '</p>' + '<p>' + element.price + '</p>');
+            });
         }
     };
+
+    request.open('GET', '/Home/GetItems/');
     request.send();
 }
 
