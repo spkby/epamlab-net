@@ -1,19 +1,11 @@
 ﻿using System;
 using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
 using Restaurant.Models;
 
 namespace Restaurant.DBContent
 {
     public class DBRestaurant : DbContext
     {
-
-        /*public DBRestaraunt() : base(
-            "workstation id=restaurant.mssql.somee.com;packet size=4096;user id=user;pwd=pass;" +
-            "data source=restaurant.mssql.somee.com;persist security info=False;initial catalog=restaurant")
-        {
-        }*/
-
         public DBRestaurant() : base(
             @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" +
             AppDomain.CurrentDomain.GetData("DataDirectory").ToString() +
@@ -23,6 +15,5 @@ namespace Restaurant.DBContent
 
         public virtual DbSet<Dish> Dishes { get; set; }
         public virtual DbSet<Account> Accounts { get; set; }
-
     }
 }

@@ -5,7 +5,9 @@ namespace Restaurant.Models
 {
     public class Dish
     {
-        [Key] [Required] public int DishId { get; set; }
+        [Key]
+        [Required]
+        public int DishId { get; set; }
 
         [DisplayName("Dishname")]
         [RegularExpression(@"[\w| ]*", ErrorMessage = "Error Dishname")]

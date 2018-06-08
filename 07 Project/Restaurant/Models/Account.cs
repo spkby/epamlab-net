@@ -6,7 +6,9 @@ namespace Restaurant.Models
 {
     public class Account
     {
-        [Key] [Required] public int AccountId { get; set; }
+        [Key]
+        [Required]
+        public int AccountId { get; set; }
 
         [DisplayName("Login")]
         [RegularExpression(@"[\w| ]*", ErrorMessage = "Error Login")]
@@ -21,6 +23,7 @@ namespace Restaurant.Models
         public string Password { get; set; }
 
         [NotMapped]
-        [DisplayName("Remember Me")] public bool RememberMe { get; set; }
+        [DisplayName("Remember Me")]
+        public bool RememberMe { get; set; }
     }
 }

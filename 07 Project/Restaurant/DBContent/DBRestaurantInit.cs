@@ -8,7 +8,6 @@ namespace Restaurant.DBContent
     {
         protected override void Seed(DBRestaurant context)
         {
-           
             var dishes = new List<Dish>
             {
                 new Dish {DishId = 1, Dishname = "Appetizer1", Desc = "Appetizer", Price = 1000, Course = 0},
@@ -26,7 +25,7 @@ namespace Restaurant.DBContent
                 new Dish {DishId = 9, Dishname = "Beverages1", Desc = "Beverages", Price = 1000, Course = 4},
                 new Dish {DishId = 10, Dishname = "Beverages2", Desc = "Beverages", Price = 1000, Course = 4},
             };
-            
+
             dishes.ForEach(d => context.Dishes.Add(d));
 
             var accounts = new List<Account>
@@ -35,7 +34,7 @@ namespace Restaurant.DBContent
             };
 
             accounts.ForEach(a => context.Accounts.Add(a));
-            
+
             context.SaveChanges();
         }
     }

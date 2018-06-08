@@ -1,9 +1,7 @@
 ﻿using Restaurant.DBContent;
 using Restaurant.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Restaurant.Controllers
@@ -24,8 +22,7 @@ namespace Restaurant.Controllers
 
         public ActionResult Index()
         {
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
-
     }
 }

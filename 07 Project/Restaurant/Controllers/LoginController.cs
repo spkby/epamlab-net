@@ -18,7 +18,8 @@ namespace Restaurant.Controllers
         {
             DBRestaurant db = new DBRestaurant();
 
-            Account account = db.Accounts.FirstOrDefault(u => u.Login.Equals(currAccount.Login) && u.Password.Equals(currAccount.Password));
+            Account account = db.Accounts.FirstOrDefault(u =>
+                u.Login.Equals(currAccount.Login) && u.Password.Equals(currAccount.Password));
 
             if (account != null && !account.Login.Equals(""))
             {
@@ -29,6 +30,7 @@ namespace Restaurant.Controllers
                 ModelState.AddModelError("Error", "Wrong Login or Password");
                 return View();
             }
+
             return RedirectToAction("Index", "Home");
         }
 
