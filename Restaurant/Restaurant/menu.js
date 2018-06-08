@@ -14,15 +14,19 @@ function getItems(id) {
     var request = new XMLHttpRequest();
 
     request.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            var items = JSON.parse(this.responseText);
-            items.forEach(element => {
-                $('#' + id).append('<h2>' + element.Dishname + '</h2>' + '<p>' + element.Desc + '</p>' + '<p>' + toByn(element.Price) + ' BYN</p>');
-            });
+        if (this.readyState === 4) {
+            if (this.status === 200) {
+                var items = JSON.parse(this.responseText);
+                items.forEach(element => {
+                    $('#' + id).append('<h2>' + element.Dishname + '</h2>' + '<p>' + element.Desc + '</p>' + '<p>' + toByn(element.Price) + ' BYN</p>');
+                });
+            } else {
+                $('#' + id).append('<h2>' + this.statusText + '</h2>');
+            }
         }
     };
 
-    request.open('GET', '/Home/GetItems/' + id);
+    request.open('GET', '/Items/Get/' + id);
     request.send();
 }
 
@@ -34,13 +38,13 @@ function toggleItem() {
         accItem[i].className = 'menuItem close';
     }
 
-    if (itemClass == 'menuItem close') {
+    if (itemClass === 'menuItem close') {
         this.parentNode.className = 'menuItem open';
 
         var id = 0;
 
         for (i = 0; i < accItem.length; i++) {
-            if (accItem[i].className == 'menuItem open') {
+            if (accItem[i].className === 'menuItem open') {
                 getItems(i);
             }
         }

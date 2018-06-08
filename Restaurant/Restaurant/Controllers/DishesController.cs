@@ -10,7 +10,7 @@ namespace Restaurant.Controllers
     [Authorize]
     public class DishesController : Controller
     {
-        private DBRestaraunt db = new DBRestaraunt();
+        private DBRestaurant db = new DBRestaurant();
 
         public ActionResult Index()
         {
